@@ -1,1 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Tabs</title>
+    <style>
+        :root {
+            --bg: #121212;
+            --card: #1e1e1e;
+            --accent: #00ff88;
+            --text: #ffffff;
+        }
 
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+        }
+
+        .tab-container {
+            width: 90%;
+            max-width: 600px;
+            background: var(--card);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: #888;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="tab-container">
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'tab1')">Vibes</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab2')">Code</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab3')">Misc</button>
+    </div>
+
+    <div id="tab1" class="content active">
+        <h3>Current Status</h3>
+        <p>Just out here building clean UIs for the homies.</p>
+    </div>
+
+    <div id="tab2" class="content">
+        <h3>The Tech</h3>
+        <p>Pure HTML, CSS, and a tiny bit of JS for the logic. No bloat.</p>
+    </div>
+
+    <div id="tab3" class="content">
+        <h3>Whatever</h3>
+        <p>Add your own nonsense here. It's easy.</p>
+    </div>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        let contents = document.querySelectorAll(".content");
+        contents.forEach(c => c.classList.remove("active"));
+
+        let btns = document.querySelectorAll(".tab-btn");
+        btns.forEach(b => b.classList.remove("active"));
+
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+</script>
+
+</body>
+</html>
