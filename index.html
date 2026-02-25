@@ -27,17 +27,17 @@
             font-weight: bold;
         }
 
-        /* Button Container (The Magic Alignment) */
+        /* Button Container */
         .soundboard-container {
             display: flex;
-            flex-wrap: wrap; /* This makes buttons wrap to the next line */
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 15px; /* Space between buttons */
+            gap: 15px;
             padding: 30px;
             max-width: 1000px;
         }
 
-        /* Spruced Up Button Style */
+        /* Button Style with Diamond Sword Background */
         .sound-btn {
             width: 120px;
             height: 120px;
@@ -45,20 +45,24 @@
             border: 2px solid #3f51b5;
             border-radius: 12px;
             cursor: pointer;
-            font-weight: bold;
-            color: #3f51b5;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+            /* Image Styling */
+            background-image: url('diamond sword.png');
+            background-size: contain;    /* Fits image inside button */
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
+        /* Hover Effects */
         .sound-btn:hover {
-            background-color: #3f51b5;
-            color: white;
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            filter: brightness(1.1); /* Makes the sword image slightly brighter */
         }
 
         .sound-btn:active {
@@ -74,11 +78,10 @@
 
     <div class="soundboard-container">
         
-        <!-- DUPLICATE THIS BLOCK FOR MORE BUTTONS -->
-        <button class="sound-btn" onclick="playSound('sounds/sound1.mp3')">
-            img1
+        <!-- To add more sounds, copy and paste this button block -->
+        <button class="sound-btn" onclick="playSound('YTDown.com_YouTube_I-CAN-SWING-MY-SWORD-Minecraft-Song_Media_eN7dYDYfvVg_001_1080p (2).wav')">
+            <!-- No text needed if you just want the sword icon -->
         </button>
-        <!-- END DUPLICATE BLOCK -->
 
     </div>
 
@@ -86,7 +89,9 @@
         // Function to play the audio
         function playSound(file) {
             const audio = new Audio(file);
-            audio.play();
+            audio.play().catch(error => {
+                console.error("Error playing sound. Make sure the file name is exact!", error);
+            });
         }
     </script>
 
