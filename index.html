@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MrCheese's Sound Collection</title>
     <style>
-        /* General Styles */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -15,7 +14,6 @@
             align-items: center;
         }
 
-        /* Header Styling */
         header {
             width: 100%;
             background-color: #3f51b5;
@@ -27,11 +25,10 @@
             font-weight: bold;
         }
 
-        /* GRID LAYOUT FIX */
+        /* Responsive Grid Layout */
         .soundboard-container {
             display: grid;
-            /* Creates as many 120px columns as will fit, then centers them */
-            grid-template-columns: repeat(auto-fit, 120px); 
+            grid-template-columns: repeat(auto-fit, 120px);
             justify-content: center;
             gap: 20px;
             padding: 40px;
@@ -39,26 +36,24 @@
             max-width: 1000px;
         }
 
-        /* FIXED Button Style */
+        /* Shared Button Styles */
         .sound-btn {
             width: 120px;
             height: 120px;
-            background-color: #000; 
+            background-color: #000; /* Fallback color */
             border: 2px solid #3f51b5;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-
-            /* Tobuscus Image Fixes */
-            background-image: url('diamond sword.png');
-            background-size: cover;    
+            
+            /* Universal background settings */
+            background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            overflow: hidden;         
+            overflow: hidden;
         }
 
-        /* Hover Effects */
         .sound-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 15px rgba(0,0,0,0.2);
@@ -72,16 +67,26 @@
 </head>
 <body>
 
-    <header>
-        MrCheese's Sound Collection
-    </header>
+    <header>MrCheese's Sound Collection</header>
 
     <div class="soundboard-container">
+        <!-- 
+           CONFIGURABLE BUTTONS: 
+           Simply change background-image: url('IMAGE_NAME.png') 
+           and playSound('SOUND_NAME.wav') for each button.
+        -->
         
-        <!-- Add more buttons here; the Grid will handle the alignment -->
-        <button class="sound-btn" onclick="playSound('YTDown.com_YouTube_I-CAN-SWING-MY-SWORD-Minecraft-Song_Media_eN7dYDYfvVg_001_1080p (2).wav')"></button>
-        <button class="sound-btn" onclick="playSound('another_sound.wav')"></button>
-        <button class="sound-btn" onclick="playSound('another_sound.wav')"></button>
+        <!-- Button 1: Tobuscus Diamond Sword -->
+        <button class="sound-btn" 
+                style="background-image: url('diamond sword.png');" 
+                onclick="playSound('YTDown.com_YouTube_I-CAN-SWING-MY-SWORD-Minecraft-Song_Media_eN7dYDYfvVg_001_1080p (2).wav')">
+        </button>
+
+        <!-- Button 2: Example with a Different Image/Sound -->
+        <button class="sound-btn" 
+                style="background-image: url('another_image.png');" 
+                onclick="playSound('another_sound.wav')">
+        </button>
 
     </div>
 
