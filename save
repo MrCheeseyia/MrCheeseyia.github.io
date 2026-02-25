@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MrCheese's Sound Collection</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #f4f7f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header Styling */
+        header {
+            width: 100%;
+            background-color: #3f51b5;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Button Container (The Magic Alignment) */
+        .soundboard-container {
+            display: flex;
+            flex-wrap: wrap; /* This makes buttons wrap to the next line */
+            justify-content: center;
+            gap: 15px; /* Space between buttons */
+            padding: 30px;
+            max-width: 1000px;
+        }
+
+        /* Spruced Up Button Style */
+        .sound-btn {
+            width: 120px;
+            height: 120px;
+            background-color: white;
+            border: 2px solid #3f51b5;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #3f51b5;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .sound-btn:hover {
+            background-color: #3f51b5;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .sound-btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        MrCheese's Sound Collection
+    </header>
+
+    <div class="soundboard-container">
+        
+        <!-- DUPLICATE THIS BLOCK FOR MORE BUTTONS -->
+        <button class="sound-btn" onclick="playSound('YTDown.com_YouTube_I-CAN-SWING-MY-SWORD-Minecraft-Song_Media_eN7dYDYfvVg_001_1080p (2).wav')">
+            
+        </button>
+        <!-- END DUPLICATE BLOCK -->
+
+    </div>
+
+    <script>
+        // Function to play the audio
+        function playSound(file) {
+            const audio = new Audio(file);
+            audio.play();
+        }
+    </script>
+
+</body>
+</html>
