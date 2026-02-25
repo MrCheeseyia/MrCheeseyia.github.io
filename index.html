@@ -3,171 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Digital Flow</title>
+    <title>MrCheese's Sound Collection</title>
     <style>
-        /* CSS - Making it look slick */
+        /* General Styles */
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 0;
-            background: #0a0a0a;
-            color: #00ff95;
-            font-family: 'Courier New', Courier, monospace;
-            overflow: hidden;
+            background-color: #f4f7f6;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
         }
 
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-
-        .ui-container {
-            position: relative;
-            z-index: 2;
+        /* Header Styling */
+        header {
+            width: 100%;
+            background-color: #3f51b5;
+            color: white;
+            padding: 20px 0;
             text-align: center;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 2rem;
-            border: 1px solid #00ff95;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 255, 149, 0.2);
-            pointer-events: none; /* Let clicks pass through to the canvas if needed */
-        }
-
-        h1 { font-size: 2.5rem; letter-spacing: 5px; margin-bottom: 10px; }
-        p { opacity: 0.8; font-size: 1rem; }
-        
-        .interactive-btn {
-            pointer-events: auto;
-            margin-top: 20px;
-            padding: 10px 25px;
-            background: transparent;
-            color: #00ff95;
-            border: 1px solid #00ff95;
-            cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 1.5rem;
             font-weight: bold;
         }
 
-        .interactive-btn:hover {
-            background: #00ff95;
-            color: #0a0a0a;
-            box-shadow: 0 0 15px #00ff95;
+        /* Button Container (The Magic Alignment) */
+        .soundboard-container {
+            display: flex;
+            flex-wrap: wrap; /* This makes buttons wrap to the next line */
+            justify-content: center;
+            gap: 15px; /* Space between buttons */
+            padding: 30px;
+            max-width: 1000px;
+        }
+
+        /* Spruced Up Button Style */
+        .sound-btn {
+            width: 120px;
+            height: 120px;
+            background-color: white;
+            border: 2px solid #3f51b5;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #3f51b5;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .sound-btn:hover {
+            background-color: #3f51b5;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .sound-btn:active {
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
 
-    <canvas id="canvas"></canvas>
+    <header>
+        MrCheese's Sound Collection
+    </header>
 
-    <div class="ui-container">
-        <h1>SYSTEM ACTIVE</h1>
-        <p>REACTIVE PARTICLE FIELD GENERATED</p>
-        <button class="interactive-btn" onclick="resetParticles()">RESET FIELD</button>
+    <div class="soundboard-container">
+        
+        <!-- DUPLICATE THIS BLOCK FOR MORE BUTTONS -->
+        <button class="sound-btn" onclick="playSound('sounds/sound1.mp3')">
+            img1
+        </button>
+        <!-- END DUPLICATE BLOCK -->
+
     </div>
 
     <script>
-        /* JS - The Interactive Magic */
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let particlesArray = [];
-        const mouse = { x: null, y: null, radius: 100 };
-
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-        });
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 2 - 1;
-                this.speedY = Math.random() * 2 - 1;
-                this.color = '#00ff95';
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                // Bounce off walls
-                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
-
-                // Mouse interaction
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx*dx + dy*dy);
-                if (distance < mouse.radius) {
-                    if (mouse.x > this.x && this.x > 10) this.x -= 5;
-                    if (mouse.x < this.x && this.x < canvas.width - 10) this.x += 5;
-                    if (mouse.y > this.y && this.y > 10) this.y -= 5;
-                    if (mouse.y < this.y && this.y < canvas.height - 10) this.y += 5;
-                }
-            }
-
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
+        // Function to play the audio
+        function playSound(file) {
+            const audio = new Audio(file);
+            audio.play();
         }
-
-        function init() {
-            particlesArray = [];
-            for (let i = 0; i < 150; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-
-        function resetParticles() {
-            init();
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-                
-                // Connect particles with lines if they are close
-                for (let j = i; j < particlesArray.length; j++) {
-                    let dx = particlesArray[i].x - particlesArray[j].x;
-                    let dy = particlesArray[i].y - particlesArray[j].y;
-                    let distance = Math.sqrt(dx*dx + dy*dy);
-                    if (distance < 100) {
-                        ctx.strokeStyle = `rgba(0, 255, 149, ${1 - distance/100})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animate);
-        }
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            init();
-        });
-
-        init();
-        animate();
     </script>
+
 </body>
 </html>
