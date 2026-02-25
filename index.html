@@ -27,42 +27,42 @@
             font-weight: bold;
         }
 
-        /* Button Container */
+        /* GRID LAYOUT FIX */
         .soundboard-container {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            /* Creates as many 120px columns as will fit, then centers them */
+            grid-template-columns: repeat(auto-fit, 120px); 
             justify-content: center;
-            gap: 15px;
-            padding: 30px;
+            gap: 20px;
+            padding: 40px;
+            width: 90%;
             max-width: 1000px;
         }
 
-        /* Button Style with Diamond Sword Background */
+        /* FIXED Button Style */
         .sound-btn {
             width: 120px;
             height: 120px;
-            background-color: white;
+            background-color: #000; 
             border: 2px solid #3f51b5;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 
-            /* Image Styling */
+            /* Tobuscus Image Fixes */
             background-image: url('diamond sword.png');
-            background-size: contain;    /* Fits image inside button */
+            background-size: cover;    
             background-repeat: no-repeat;
             background-position: center;
+            overflow: hidden;         
         }
 
         /* Hover Effects */
         .sound-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-            filter: brightness(1.1); /* Makes the sword image slightly brighter */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            filter: brightness(1.2);
         }
 
         .sound-btn:active {
@@ -78,19 +78,18 @@
 
     <div class="soundboard-container">
         
-        <!-- To add more sounds, copy and paste this button block -->
-        <button class="sound-btn" onclick="playSound('YTDown.com_YouTube_I-CAN-SWING-MY-SWORD-Minecraft-Song_Media_eN7dYDYfvVg_001_1080p (2).wav')">
-            <!-- No text needed if you just want the sword icon -->
-        </button>
+        <!-- Add more buttons here; the Grid will handle the alignment -->
+        <button class="sound-btn" onclick="playSound('YTDown.com_YouTube_I-CAN-SWING-MY-SWORD-Minecraft-Song_Media_eN7dYDYfvVg_001_1080p (2).wav')"></button>
+        <button class="sound-btn" onclick="playSound('another_sound.wav')"></button>
+        <button class="sound-btn" onclick="playSound('another_sound.wav')"></button>
 
     </div>
 
     <script>
-        // Function to play the audio
         function playSound(file) {
             const audio = new Audio(file);
             audio.play().catch(error => {
-                console.error("Error playing sound. Make sure the file name is exact!", error);
+                console.error("Audio error:", error);
             });
         }
     </script>
